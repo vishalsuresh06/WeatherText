@@ -1,6 +1,8 @@
 import schedule
 import time
 import requests
+import TwilioInfo
+from twilio.rest import Client
 
 def get_data(lat, long):
     url = f"https://api.open-meteo.com/v1/forecast?latitude={lat}&longitude={long}&hourly=temperature_2m,relativehumidity_2m,precipitation_probability,windspeed_10m&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&forecast_days=1"
@@ -27,6 +29,17 @@ def send_update():
         f"Wind Speed: {wind} mph\n"
         f"Precipitation: {rain}\n"
     )
+    
+def send_text(body):
+    client = Client(TwilioInfo.SID, TwilioInfo.Token)
+    
+    message = client.messages.create(
+        body=body,
+        from_=TwilioInfo.from_Num,
+        to=TwilioInfo.to_Num
+    )
+    print("Message Sent!")
+    
 
 def main():
     schedule.every().day().at("06:00").do(send_update)
