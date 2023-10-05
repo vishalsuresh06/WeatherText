@@ -1,4 +1,4 @@
 # Read Me
 
-This program sends a text message to the number specified/
+This program sends a text message to the number specified\
 The message contains information about the weather to the hardcoded coordinates
