@@ -42,7 +42,8 @@ def send_text(body):
     
 
 def main():
-    schedule.every().day().at("06:00").do(send_update)
+    #schedule.every().day().at("06:00").do(send_update)
+    send_update()
     while True:
         schedule.run_pending()
         time.sleep(1)
